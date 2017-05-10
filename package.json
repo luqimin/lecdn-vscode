@@ -2,7 +2,7 @@
     "name": "tiny-lecdn",
     "displayName": "tiny lecdn",
     "description": "upload the current file to lecdn and get a cdn url",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/luqimin/lecdn-vscode"
@@ -20,6 +20,63 @@
     ],
     "main": "./extension",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "lecdn",
+            "properties": {
+                "lecdn.host": {
+                    "type": "string",
+                    "default": "",
+                    "description": "找QiminLu"
+                },
+                "lecdn.port": {
+                    "type": [
+                        "string",
+                        "number"
+                    ],
+                    "default": "",
+                    "description": "找QiminLu"
+                },
+                "lecdn.path": {
+                    "type": "string",
+                    "default": "",
+                    "description": "找QiminLu"
+                },
+                "lecdn.channel": {
+                    "type": "string",
+                    "default": "fe",
+                    "description": "找QiminLu"
+                },
+                "lecdn.username": {
+                    "type": "string",
+                    "default": "",
+                    "description": "找QiminLu"
+                },
+                "lecdn.md5str": {
+                    "type": "string",
+                    "default": "",
+                    "description": "找QiminLu"
+                },
+                "lecdn.single_upload_submit": {
+                    "type": "string",
+                    "default": "ok",
+                    "description": "找QiminLu"
+                },
+                "lecdn.type": {
+                    "type": "string",
+                    "default": "mimetype",
+                    "description": "找QiminLu"
+                },
+                "lecdn.compress": {
+                    "type": [
+                        "string",
+                        "number"
+                    ],
+                    "default": "0",
+                    "description": "找QiminLu"
+                }
+            }
+        },
         "commands": [
             {
                 "command": "extension.lecdn",

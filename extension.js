@@ -1,17 +1,8 @@
 const vscode = require('vscode');
 const http = require('http');
 const fs = require('fs');
-const path = require('path');
 const FormData = require('form-data');
 
-let configFile = path.join(__dirname, 'cdnconfig.json');
-let generateConfigFile = function () {
-    if (!fs.existsSync(configFile)) {
-        fs.writeFileSync(configFile, '{}', {
-            encoding: 'utf8'
-        });
-    }
-};
 let uploadFile = function (CONFIG, filePath) {
     let form = new FormData();
 
@@ -27,7 +18,7 @@ let uploadFile = function (CONFIG, filePath) {
         host: CONFIG.host,
         port: CONFIG.port,
         method: 'POST',
-        path: CONFIG.path, //上传服务路径
+        path: CONFIG.path,
         headers: form.getHeaders()
     }
 
@@ -46,9 +37,8 @@ let uploadFile = function (CONFIG, filePath) {
 };
 
 function activate(context) {
+    let CONFIG = vscode.workspace.getConfiguration('lecdn');
     var uploader = vscode.commands.registerCommand('extension.lecdn', function () {
-        generateConfigFile();
-        let CONFIG = require(configFile);
         if (!CONFIG.host) {
             vscode.window.showWarningMessage('请先完成lecdn配置, 具体咨询QiminLu');
             return;
@@ -74,14 +64,7 @@ function activate(context) {
 
     });
     var editConfig = vscode.commands.registerCommand('extension.lecdnConfig', function () {
-        generateConfigFile();
-        vscode.workspace.openTextDocument(configFile).then(function (textDocument) {
-            vscode.window.showTextDocument(textDocument).then(function (editor) {
-                if (editor) {
-                    vscode.window.showInformationMessage('找 QiminLu ^_^ 要配置参数吧, 修改后记得保存并且重启vscode哦~');
-                }
-            });
-        });
+        vscode.window.showInformationMessage(`请手动打开vscode设置, 搜索 lecdn, 进行相关配置`);
     });
     context.subscriptions.push(uploader);
     context.subscriptions.push(editConfig);
