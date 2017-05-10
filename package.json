@@ -1,0 +1,48 @@
+{
+  "name": "tiny-lecdn",
+  "displayName": "tiny lecdn",
+  "description": "upload the current file to lecdn and get a cdn url",
+  "version": "0.0.1",
+  "publisher": "luqimin",
+  "engines": {
+    "vscode": "^1.12.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.lecdn",
+    "onCommand:extension.lecdnConfig"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [{
+        "command": "extension.lecdn",
+        "title": "Lecdn: 上传 => 上传当前文件至letvcdn"
+      },
+      {
+        "command": "extension.lecdnConfig",
+        "title": "Lecdn: 配置 => 配置letvcdn相关参数"
+      }
+    ],
+    "keybindings": [{
+      "command": "extension.lecdn",
+      "key": "ctrl+shift+u"
+    }]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "mocha": "^2.3.3",
+    "eslint": "^3.6.0",
+    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.32"
+  },
+  "dependencies": {
+    "form-data": "^2.1.4"
+  }
+}
