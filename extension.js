@@ -5,7 +5,13 @@ const path = require('path');
 const FormData = require('form-data');
 
 let configFile = path.join(__dirname, 'cdnconfig.json');
-
+let generateConfigFile = function () {
+    if (!fs.existsSync(configFile)) {
+        fs.writeFileSync(configFile, '{}', {
+            encoding: 'utf8'
+        });
+    }
+};
 let uploadFile = function (CONFIG, filePath) {
     let form = new FormData();
 
@@ -31,10 +37,8 @@ let uploadFile = function (CONFIG, filePath) {
             if (_res.state == 1) {
                 vscode.window.showInformationMessage(`上传成功: ${_res.file}`);
             } else {
-                console.log(_res);
                 vscode.window.showErrorMessage(`上传失败: ${_res.file}`);
             }
-
         });
     });
 
@@ -42,10 +46,8 @@ let uploadFile = function (CONFIG, filePath) {
 };
 
 function activate(context) {
-
-    console.log('Congratulations, your extension "tiny-lecdn" is now active!');
-
     var uploader = vscode.commands.registerCommand('extension.lecdn', function () {
+        generateConfigFile();
         let CONFIG = require(configFile);
         if (!CONFIG.host) {
             vscode.window.showWarningMessage('请先完成lecdn配置, 具体咨询QiminLu');
@@ -72,6 +74,7 @@ function activate(context) {
 
     });
     var editConfig = vscode.commands.registerCommand('extension.lecdnConfig', function () {
+        generateConfigFile();
         vscode.workspace.openTextDocument(configFile).then(function (textDocument) {
             vscode.window.showTextDocument(textDocument).then(function (editor) {
                 if (editor) {
