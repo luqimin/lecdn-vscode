@@ -2,14 +2,14 @@
     "name": "tiny-lecdn",
     "displayName": "tiny lecdn",
     "description": "upload the current file to lecdn and get a cdn url",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "repository": {
         "type": "git",
         "url": "https://github.com/luqimin/lecdn-vscode"
     },
     "publisher": "luqimin",
     "engines": {
-        "vscode": "^1.12.0"
+        "vscode": "^1.0.0"
     },
     "categories": [
         "Other"
